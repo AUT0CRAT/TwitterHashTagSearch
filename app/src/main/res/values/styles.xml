@@ -1,0 +1,82 @@
+<!--
+  ~ Copyright 2016 Alim Parkar.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  ~ use this file except in compliance with the License. You may obtain a copy of
+  ~ the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing permissions and limitations under
+  ~ the License.
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/primaryText</item>
+        <item name="android:textColorSecondary">@color/secondaryText</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextView</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/primaryText</item>
+        <item name="android:textColorSecondary">@color/secondaryText</item>
+        <item name="android:textViewStyle">@style/AppTheme.TextView</item>
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.Splash">
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="AppTheme.TextView">
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
+
+    <style name="AppTheme.Text.Bold" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">@color/primaryText</item>
+    </style>
+
+    <style name="AppTheme.TextAppearance.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.TextAppearance.Subtext">
+        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.TextAppearance.Description">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <color name="background">#c4c4c4</color>
+</resources>

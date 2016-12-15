@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2016 Alim Parkar.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+  ~ use this file except in compliance with the License. You may obtain a copy of
+  ~ the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing permissions and limitations under
+  ~ the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/icons"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_list_item">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentLeft="true"
+            tools:src="@drawable/ic_search"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/AppTheme.TextAppearance.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left_components"
+            android:layout_toRightOf="@+id/ivProfilePic"
+            tools:text="Name"/>
+
+
+        <TextView
+            android:id="@+id/tvTwitterHandle"
+            style="@style/AppTheme.TextAppearance.Subtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left_components"
+            android:layout_toRightOf="@+id/tvName"
+            tools:text="\@Handle"/>
+
+        <TextView
+            android:id="@+id/tvTweet"
+            style="@style/AppTheme.TextAppearance.Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName"
+            android:layout_marginLeft="@dimen/margin_left_components"
+            android:layout_marginTop="@dimen/margin_left_components"
+            android:layout_toRightOf="@+id/ivProfilePic"
+            tools:text="Lorem Ipsum.Lorem Ipsum.Lorem IpsumLorem Ipsum.Lorem Ipsum.Lorem IpsumLorem Ipsum.Lorem Ipsum.Lorem IpsumLorem Ipsum.Lorem Ipsum.Lorem Ipsum"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_retweet"/>
+
+        <TextView
+            android:id="@+id/tvRetweets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="50"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            app:srcCompat="@drawable/ic_fav"/>
+
+
+        <TextView
+            android:id="@+id/tvFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="10"/>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            tools:text="Time Stamp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
