@@ -26,5 +26,7 @@
     <color name="divider">#BDBDBD</color>
     <color name="white">#ffffff</color>
 
+    <color name="background">#bdbdbd</color>
+
     <color name="dotSeperator">#212121</color>
 </resources>

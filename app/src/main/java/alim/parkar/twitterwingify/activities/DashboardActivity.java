@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,12 +42,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import alim.parkar.twitterwingify.R;
+import alim.parkar.twitterwingify.communication.NetworkUtil;
 import alim.parkar.twitterwingify.communication.TweetsLoaderTask;
 import alim.parkar.twitterwingify.components.TweetsAdapter;
 import alim.parkar.twitterwingify.models.Tweet;
 
+import static android.view.View.GONE;
+
 /**
- * @author ibasit
+ * Activity that provides search and displays list of tweets.
  */
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener, TweetsLoaderTask.CallBack, TextView.OnEditorActionListener {
 
@@ -93,10 +97,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         llNewTweets.setOnClickListener(this);
         etSearch.setOnEditorActionListener(this);
 
+        //check for saved instance and repopulate ui if present
         if (savedInstanceState != null) {
             ArrayList savedData = savedInstanceState.<Tweet>getParcelableArrayList(ADAPTER_DATA);
             if (savedData != null) {
                 mTweetAdapter.addTweets(savedData);
+                rvTweetList.setVisibility(View.VISIBLE);
+                noContent.setVisibility(View.GONE);
             }
 
             mSearch = savedInstanceState.getString(SAVED_QUERY, "");
@@ -130,6 +137,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /**
+     * Perform the operation of loading the old tweets for searched hashtag.
+     */
     private void loadMore() {
         if (mTweetAdapter == null) {
             return;
@@ -142,7 +152,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         Tweet lastTweet = mTweetAdapter.getItemAtPosition(count - 1);
         if (lastTweet != null) {
-            mLoaderTask = new TweetsLoaderTask(0, lastTweet.getTweetId(), mSearch);
+            //load tweets with id greater that lastFetchedId + 1 (API fetches results including the max id in the result)
+            mLoaderTask = new TweetsLoaderTask(0, lastTweet.getTweetId() + 1, mSearch);
             mLoaderTask.load(this);
         }
     }
@@ -162,6 +173,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /**
+     * Search hashtag typed in the search box.
+     */
     private void performSearch() {
         hideKeyboard(etSearch);
         if (mSnackbar != null && mSnackbar.isShownOrQueued()) {
@@ -170,8 +184,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         String query = etSearch.getText().toString();
         if (query.trim().length() == 0) {
-            mSnackbar = Snackbar.make(rvTweetList, "Search Cannot be empty", Snackbar.LENGTH_LONG);
+            mSnackbar = Snackbar.make(rvTweetList, R.string.error_empty_search, Snackbar.LENGTH_LONG);
+            mSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
             mSnackbar.show();
+            return;
+        }
+
+        if (!NetworkUtil.isNetworkAvailable(this)) {
+            mSnackbar = Snackbar.make(rvTweetList, R.string.error_no_network, Snackbar.LENGTH_LONG);
+            mSnackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            mSnackbar.show();
+            return;
         }
 
         mSearch = query;
@@ -220,8 +243,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                     mLoaderTask.load(new TweetsLoaderTask.CallBack() {
                         @Override
                         public void onSuccess(List<Tweet> tweets) {
-                            Log.i(TAG, "new tweets : " + tweets.size());
                             isLoading = false;
+                            if (tweets == null) {
+                                return;
+                            }
+                            Log.i(TAG, "new tweets : " + tweets.size());
+
                             if (tweets.size() > 0) {
                                 mTweetAdapter.addLatestTweets(tweets);
                                 lastCount = mTweetAdapter.getItemCount();
@@ -257,7 +284,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         if (show) {
             llNewTweets.setVisibility(View.VISIBLE);
         } else {
-            llNewTweets.setVisibility(View.GONE);
+            llNewTweets.setVisibility(GONE);
         }
 
     }
@@ -271,8 +298,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         if (mTweetAdapter.getItemCount() == 0) {
             noContent.setVisibility(View.VISIBLE);
+            rvTweetList.setVisibility(View.GONE);
         } else {
             noContent.setVisibility(View.GONE);
+            rvTweetList.setVisibility(View.VISIBLE);
         }
     }
 

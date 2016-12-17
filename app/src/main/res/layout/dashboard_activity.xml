@@ -20,45 +20,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_left_components"
-        android:background="@color/white"
-        android:orientation="horizontal">
+        app:cardBackgroundColor="@color/white">
 
-        <EditText
-            android:id="@+id/etSearch"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:hint="@string/hint_search_hashtag"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLines="1"
-            android:textColorHint="@color/background"/>
+            android:layout_height="52dp"
+            android:layout_margin="@dimen/margin_left_components"
+            android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/ivSearch"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            app:srcCompat="@drawable/ic_search"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tvHash"
+                style="@style/AppTheme.Text.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/hash"/>
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvHash"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_search_hashtag"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHint="@color/background"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_search"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvTweetList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/llNewTweets"
@@ -79,15 +96,19 @@
 
         <LinearLayout
             android:id="@+id/llNoContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone">
+            android:visibility="visible">
+
+            <android.support.v7.widget.AppCompatImageView
+                app:srcCompat="@drawable/ic_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="No Results"/>
         </LinearLayout>
 

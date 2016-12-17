@@ -82,6 +82,4 @@
         <item name="background">@android:drawable/screen_background_light_transparent</item>
     </style>
 
-
-    <color name="background">#c4c4c4</color>
 </resources>

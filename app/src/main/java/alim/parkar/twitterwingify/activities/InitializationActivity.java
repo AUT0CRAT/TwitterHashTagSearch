@@ -18,13 +18,15 @@ package alim.parkar.twitterwingify.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import alim.parkar.twitterwingify.R;
 import alim.parkar.twitterwingify.communication.LoginCallback;
 import alim.parkar.twitterwingify.communication.LoginCommunicator;
+import alim.parkar.twitterwingify.communication.NetworkUtil;
 
 public class InitializationActivity extends AppCompatActivity implements LoginCallback {
 
@@ -105,7 +107,18 @@ public class InitializationActivity extends AppCompatActivity implements LoginCa
     }
 
     private void showFailureMessage() {
-        Toast.makeText(this, R.string.error_login_failure, Toast.LENGTH_LONG).show();
+
+        int msgId;
+        if (NetworkUtil.isNetworkAvailable(this)) {
+            msgId = R.string.error_login_failure;
+        } else {
+            msgId = R.string.error_no_network;
+        }
+
+
+        Snackbar snackbar = Snackbar.make(progressParent, msgId, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        snackbar.show();
         progressParent.setVisibility(View.GONE);
     }
 }
