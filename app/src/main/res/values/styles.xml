@@ -41,6 +41,7 @@
         <item name="android:textViewStyle">@style/AppTheme.TextView</item>
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
     </style>
 
     <style name="AppTheme.Splash">
@@ -75,6 +76,10 @@
 
     <style name="AppTheme.TextAppearance.Description">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="background">@android:drawable/screen_background_light_transparent</item>
     </style>
 
 

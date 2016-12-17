@@ -35,31 +35,54 @@
             android:layout_alignParentLeft="true"
             tools:src="@drawable/ic_search"/>
 
-        <TextView
-            android:id="@+id/tvName"
-            style="@style/AppTheme.TextAppearance.Title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left_components"
             android:layout_toRightOf="@+id/ivProfilePic"
-            tools:text="Name"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/AppTheme.TextAppearance.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Name"/>
 
 
-        <TextView
-            android:id="@+id/tvTwitterHandle"
-            style="@style/AppTheme.TextAppearance.Subtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_left_components"
-            android:layout_toRightOf="@+id/tvName"
-            tools:text="\@Handle"/>
+            <TextView
+                android:id="@+id/tvTwitterHandle"
+                style="@style/AppTheme.TextAppearance.Subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left_components"
+                android:layout_toRightOf="@+id/tvName"
+                tools:text="\@Handle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_left_components"
+                android:layout_toRightOf="@id/tvTwitterHandle"
+                android:src="@drawable/ic_dot"/>
+
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left_components"
+                tools:text="1h"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvTweet"
             style="@style/AppTheme.TextAppearance.Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvName"
+            android:layout_below="@+id/llTitle"
             android:layout_marginLeft="@dimen/margin_left_components"
             android:layout_marginTop="@dimen/margin_left_components"
             android:layout_toRightOf="@+id/ivProfilePic"
@@ -98,12 +121,6 @@
             android:layout_height="wrap_content"
             tools:text="10"/>
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            tools:text="Time Stamp"/>
     </LinearLayout>
 
 

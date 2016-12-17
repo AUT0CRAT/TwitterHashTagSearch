@@ -24,7 +24,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_margin="@dimen/margin_left_components"
         android:background="@color/white"
         android:orientation="horizontal">
@@ -33,11 +33,12 @@
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:hint="@string/hint_search_hashtag"
-            android:maxLines="1"
-            android:inputType="text"
             android:imeOptions="actionDone"
-            android:singleLine="true"/>
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColorHint="@color/background"/>
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivSearch"
@@ -58,6 +59,23 @@
             android:id="@+id/rvTweetList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/llNewTweets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/new_tweet_background"
+            android:clickable="true"
+            android:padding="@dimen/padding_list_item"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/msg_new_tweets"
+                android:textColor="@color/white"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llNoContent"

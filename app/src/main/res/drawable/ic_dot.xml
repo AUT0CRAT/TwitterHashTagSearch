@@ -14,17 +14,11 @@
   ~ License for the specific language governing permissions and limitations under
   ~ the License.
   -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
 
-<resources>
-    <color name="colorPrimary">#03A9F4</color>
-    <color name="colorPrimaryDark">#0288D1</color>
-    <color name="primary_light">#B3E5FC</color>
-    <color name="colorAccent">#448AFF</color>
-    <color name="primaryText">#212121</color>
-    <color name="secondaryText">#757575</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#BDBDBD</color>
-    <color name="white">#ffffff</color>
-
-    <color name="dotSeperator">#212121</color>
-</resources>
+    <size
+        android:width="1dp"
+        android:height="1dp"/>
+    <solid android:color="@color/dotSeperator"/>
+</shape>

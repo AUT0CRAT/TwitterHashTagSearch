@@ -35,6 +35,7 @@ import java.util.List;
 import alim.parkar.twitterwingify.R;
 import alim.parkar.twitterwingify.communication.ProfilePicLoader;
 import alim.parkar.twitterwingify.models.Tweet;
+import alim.parkar.twitterwingify.utils.TimeUtils;
 
 import static android.content.ComponentCallbacks2.TRIM_MEMORY_BACKGROUND;
 import static android.content.ComponentCallbacks2.TRIM_MEMORY_MODERATE;
@@ -106,6 +107,24 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         return data == null ? null : data.get(postition);
     }
 
+    public void addLatestTweets(List<Tweet> tweets) {
+        if (tweets == null) {
+            return;
+        }
+
+        if (data == null) {
+            data = new ArrayList<>(tweets.size());
+        }
+
+        if (profilePicCache == null) {
+            profilePicCache = new ProfilePicCache();
+        }
+
+        Collections.sort(tweets);
+        data.addAll(0, tweets);
+
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -135,15 +154,18 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvTweet.setText(tweet.getTweet());
             tvFavorite.setText(tweet.getFavoriteCount());
             tvRetweets.setText(tweet.getRetweetCount());
-            tvTime.setText(tweet.getCreatedAt());
+            //tvTime.setText(tweet.getCreatedAt());
+            tvTime.setText(TimeUtils.getDisplayTime(tweet.getCreatedAt()));
 
             Drawable profilePic = profilePicCache.get(tweet.getTweetId());
             if (profilePic != null) {
                 ivProfilePic.setImageDrawable(profilePic);
             } else {
+                ivProfilePic.setImageResource(R.drawable.ic_profile_placeholder);
                 loadProfilePic(tweet);
             }
         }
+
 
         private void loadProfilePic(Tweet tweet) {
             new ProfilePicLoader(tweet.getTweetId(), tweet.getProfilePic(), new ProfilePicLoader.Callback() {
