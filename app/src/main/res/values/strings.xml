@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Twitter Wingify</string>
+    <string name="app_name">Twitter Hashtag Search</string>
     <string name="error_login_failure">Oops! Something went wrong. Launch the application Again</string>
     <string name="msg_initializing">Initializing</string>
     <string name="hint_search_hashtag">Type HashTag to search</string>
