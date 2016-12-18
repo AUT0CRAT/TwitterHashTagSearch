@@ -67,12 +67,20 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         return data == null ? 0 : data.size();
     }
 
+    /**
+     * Clears the tweets from the adapter.
+     */
     public void clear() {
         if (data != null) {
             data.clear();
         }
     }
 
+    /**
+     * Adds tweets to the bottom of the adapter. The tweets passed will be sorted before adding to the adapter.
+     *
+     * @param tweets Tweets to be added.
+     */
     public void addTweets(List<Tweet> tweets) {
         if (tweets == null) {
             return;
@@ -91,10 +99,21 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    /**
+     * Fetch all the tweets in the adapter.
+     *
+     * @return Returns the tweets added in the adapter. Returns <code>null</code> if the adapter is never loaded with tweets.
+     */
     public ArrayList<Tweet> getAll() {
         return data == null ? null : new ArrayList<>(data);
     }
 
+    /**
+     * Cleans up the adapter. This will clear the profile pic cache
+     *
+     * @param level The level for cleanup. One of {@link android.content.ComponentCallbacks2.TRIM_MEMORY_MODERATE} ,
+     *              {@link android.content.ComponentCallbacks2.TRIM_MEMORY_BACKGROUND}
+     */
     public void onTrimMemory(int level) {
         if (level >= TRIM_MEMORY_MODERATE) {
             profilePicCache.evictAll();
@@ -103,10 +122,29 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
     }
 
-    public Tweet getItemAtPosition(int postition) {
-        return data == null ? null : data.get(postition);
+    /**
+     * Returns the tweet at the given index.
+     *
+     * @param position The position of the tweet to be fetched.
+     * @return Tweet at the given position. Returns <code>null</code> if the position is less than 0 or greater than the size of the adapter.
+     */
+    public Tweet getItemAtPosition(int position) {
+        if (data == null) {
+            return null;
+        }
+
+        if (position < 0 || position > data.size()) {
+            return null;
+        }
+
+        return data.get(position);
     }
 
+    /**
+     * Adds the tweets at the top of the adapter.
+     *
+     * @param tweets The tweets to be added at the top of the adapter. The tweets are sorted before they are added.
+     */
     public void addLatestTweets(List<Tweet> tweets) {
         if (tweets == null) {
             return;
@@ -183,7 +221,10 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
     }
 
-    class ProfilePicCache extends LruCache<Long, Drawable> {
+    /**
+     * Maintains a cache of profile pics. Max cache size is 10MB
+     */
+    private class ProfilePicCache extends LruCache<Long, Drawable> {
 
         private static final int MAX_CACHE_SIZE = 10 * 8 * 1024; //10 MB
 

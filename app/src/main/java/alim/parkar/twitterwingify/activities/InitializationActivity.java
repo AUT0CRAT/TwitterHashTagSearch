@@ -28,6 +28,9 @@ import alim.parkar.twitterwingify.communication.LoginCallback;
 import alim.parkar.twitterwingify.communication.LoginCommunicator;
 import alim.parkar.twitterwingify.communication.NetworkUtil;
 
+/**
+ * This activity is responsible for logging in twitter.
+ */
 public class InitializationActivity extends AppCompatActivity implements LoginCallback {
 
     private static final String TASK_IN_PROGRESS = "TASK_IN_PROGRESS";

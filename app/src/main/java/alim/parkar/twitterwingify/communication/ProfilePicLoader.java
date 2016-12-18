@@ -29,10 +29,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import alim.parkar.twitterwingify.TwitterApplication;
 
 /**
- * @author ibasit
+ * AsyncTask that loads a profile picture
  */
 public class ProfilePicLoader extends AsyncTask<Void, Void, Drawable> {
 
@@ -42,6 +44,13 @@ public class ProfilePicLoader extends AsyncTask<Void, Void, Drawable> {
     private long identifier;
     private Callback callback;
 
+    /**
+     * Constructor.
+     *
+     * @param identifier The identifier for the tweet. This will be returned in the callback methods.
+     * @param path       Path to the profile picture to be downloaded.
+     * @param callback   Callback to whom the result will be sent.
+     */
     public ProfilePicLoader(long identifier, String path, Callback callback) {
         this.path = path;
         this.identifier = identifier;
@@ -54,7 +63,7 @@ public class ProfilePicLoader extends AsyncTask<Void, Void, Drawable> {
         Bitmap x;
         HttpURLConnection connection;
         try {
-            connection = (HttpURLConnection) new URL(path).openConnection();
+            connection = (HttpsURLConnection) new URL(path).openConnection();
             connection.connect();
             InputStream input = connection.getInputStream();
 
@@ -85,9 +94,23 @@ public class ProfilePicLoader extends AsyncTask<Void, Void, Drawable> {
         }
     }
 
+    /**
+     * Picture result callbacks
+     */
     public interface Callback {
+        /**
+         * Called when the Profile picture is loaded successfully
+         *
+         * @param identifier The identifier which was passed to {@link ProfilePicLoader#ProfilePicLoader(long, String, Callback)};
+         * @param drawable   The drawable loaded from the url passed to {@link ProfilePicLoader#ProfilePicLoader(long, String, Callback)};
+         */
         void onProfilePicLoaded(long identifier, Drawable drawable);
 
+        /**
+         * Called when the picture fails to load.
+         *
+         * @param identifier The identifier which was passed to {@link ProfilePicLoader#ProfilePicLoader(long, String, Callback)};
+         */
         void onProfilePicLoadFailed(long identifier);
     }
 }

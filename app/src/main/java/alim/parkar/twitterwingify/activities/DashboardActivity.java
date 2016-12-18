@@ -36,7 +36,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -99,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         //check for saved instance and repopulate ui if present
         if (savedInstanceState != null) {
-            ArrayList savedData = savedInstanceState.<Tweet>getParcelableArrayList(ADAPTER_DATA);
+            List<Tweet> savedData = savedInstanceState.getParcelableArrayList(ADAPTER_DATA);
             if (savedData != null) {
                 mTweetAdapter.addTweets(savedData);
                 rvTweetList.setVisibility(View.VISIBLE);
@@ -123,9 +122,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+
+                //After the list is scrolled, check the last visible position in the list. If the position is the threshold value load the bottom tweets.
                 int totalItemCount = mTweetAdapter.getItemCount();
                 int lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
-
 
                 if (!isLoading && totalItemCount <= (lastVisibleItem + VISIBILITY_THRESHOLD) && shouldLoad) {
                     loadMore();
@@ -207,6 +207,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * Searches the hashtag typed in the search field. A timer for 3 secs will also be started so that the latest tweets are also fetched
+     * <p>Note : This will clear the adapter</p>
+     *
+     * @param query the hashtag to be searched
+     */
     public void searchAndLoad(String query) {
         if (query == null || query.isEmpty()) {
             return;
@@ -223,6 +229,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         startFetchTimer();
     }
 
+    /**
+     * Start the timer to fetch latest tweets for the last searched hashtag.
+     */
     private void startFetchTimer() {
         fetchLatestTweetsTimer = new Timer();
         fetchLatestTweetsTimer.scheduleAtFixedRate(new TimerTask() {
@@ -274,6 +283,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /**
+     * Shows/hides the new tweets view on top on the feed list.
+     * <p>If The first item visible in the list is the first position in the adapter, the view will not be shown. The list will be refreshed instead.</p>
+     *
+     * @param show true if you want to show the view, false if you want to hide the view
+     */
     private void showNewTweetsAvailable(boolean show) {
         int firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
         if (firstVisibleItem == 0 && mTweetAdapter != null) {

@@ -22,11 +22,14 @@ import android.content.Context;
 import java.lang.ref.WeakReference;
 
 /**
- * @author ibasit
+ * Application that will be used to save the context and fetch it across the application where context is not available.
  */
 public class TwitterApplication extends Application {
 
 
+    /**
+     * As the application is in memory, the weak reference will also be in memory. As soon as the application is killed, the weak reference will also be destroyed, and memory leaks will not occur.
+     */
     private static WeakReference<Context> contextWeakReference;
 
     public static Context getContext() {

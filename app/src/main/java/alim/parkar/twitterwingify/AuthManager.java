@@ -42,13 +42,22 @@ public class AuthManager {
         return INSTANCE;
     }
 
-
+    /**
+     * Saves the auth token to the shared preference.
+     *
+     * @param token Token to be saved.
+     */
     public void saveAuthToken(String token) {
         Log.d(TAG, "Saving token : " + token);
         SharedPreferences preferences = TwitterApplication.getContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         preferences.edit().putString(PREF_AUTH, token).apply();
     }
 
+    /**
+     * Fetches the auth token previously saved.
+     *
+     * @return The saved auth token. <code>null</code> if the token is not saved.
+     */
     public String getAuthToken() {
         SharedPreferences preferences = TwitterApplication.getContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return preferences.getString(PREF_AUTH, null);

@@ -17,10 +17,16 @@
 package alim.parkar.twitterwingify.communication;
 
 /**
- * Created by Alim on 12/14/2016.
+ * Interface for Login callback.
  */
 public interface LoginCallback {
+    /**
+     * Called when login is successful
+     */
     void onLoginSuccess();
 
+    /**
+     * Called when login fails
+     */
     void onLoginFailure();
 }

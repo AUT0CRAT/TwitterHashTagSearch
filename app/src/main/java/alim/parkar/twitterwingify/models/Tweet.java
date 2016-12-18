@@ -20,7 +20,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author ibasit
+ * Tweet model.
  */
 public class Tweet implements Comparable, Parcelable {
 

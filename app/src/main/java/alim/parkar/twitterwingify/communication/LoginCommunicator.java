@@ -86,6 +86,10 @@ public class LoginCommunicator {
         return null;
     }
 
+    /**
+     * Perform login.
+     * @param callback Login callback where the login result will be propagated to.
+     */
     public void login(LoginCallback callback) {
         this.loginCallback = callback;
         if (mLoginTask != null) {

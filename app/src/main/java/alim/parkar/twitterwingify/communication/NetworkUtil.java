@@ -27,6 +27,11 @@ public class NetworkUtil {
 
     private static final String TAG = "NetworkUtil";
 
+    /**
+     * Checks if the device is current connected to the internet.
+     * @param context This context will be used to fetch the Connectivity Service.
+     * @return <code>true</code> if the device is connected to a network with internet. Returns <code>false</code> otherwise.
+     */
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
